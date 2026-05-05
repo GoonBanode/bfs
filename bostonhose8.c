@@ -52,3 +52,22 @@ print(f"\nTest MAE: {mae}")
 predictions = model.predict(X_test[:5])
 print("\nSample Predictions:", predictions.flatten())
 print("Actual Values:", y_test[:5])
+    # ---- Manual Input Prediction ----
+
+print("\nEnter values for prediction:")
+
+user_input = []
+for i in range(8):
+    val = float(input(f"Enter feature {i+1}: "))
+    user_input.append(val)
+
+import numpy as np
+
+user_input = np.array(user_input).reshape(1, -1)
+
+# IMPORTANT: Apply same scaling
+user_input_scaled = scaler.transform(user_input)
+
+prediction = model.predict(user_input_scaled)
+
+print("\nPredicted House Price:", prediction[0][0])
